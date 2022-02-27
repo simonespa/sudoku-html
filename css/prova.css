@@ -1,0 +1,71 @@
+/* 
+    Document   : prova
+    Created on : 06-Apr-2013, 18:44:58
+    Author     : Simone Spaccarotella {spa.simone@gmail.com}
+    Description:
+        Defines the style of the Sudoku.
+*/
+
+/*
+root { 
+    display: block;
+}
+*/
+
+body {
+    background-image: url('../img/background.jpg');
+}
+
+#sudoku {
+    background-color: #a6c9e2;
+    box-shadow: 10px 10px 5px #E2EBED;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: 8%;
+    margin-right: 8%;
+    padding: 3% 3% 3% 3%;
+}
+
+#grid{
+    left: 10px;
+    top: 10px;
+    margin: 5% 5% 5% 5%;
+    width: 456px;
+    height: 456px;
+    border: 2px solid #000;
+}
+
+.cell, .cellHighlighted {
+    width: 46px;
+    height: 46px;
+    float: left;
+    border: 1px solid #000000;
+    padding: 1px;
+    line-height: 46px;
+    font-size: 30px;
+    text-align: center;
+    cursor: default;
+}
+
+.cellHighlighted {
+    border: 2px solid #317082;
+    width: 46px;
+    height: 46px;
+    padding: 0px;
+    background-color: #E2EBED;
+}
+
+.subGrid {
+    width: 150px;
+    height: 150px;
+    border: 1px solid #000000;
+    float: left;
+}
+
+.odd {
+    background-color: #a6c9e2;
+}
+
+.even {
+    background-color: buttonface;
+}

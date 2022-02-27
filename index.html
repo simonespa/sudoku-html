@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sudoku</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <link rel="stylesheet" href="css/prova.css">
+        <link rel="stylesheet" href="css/jquery-ui-1.10.2.css">
+
+        <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+        <script type="text/javascript" src="js/jquery-ui-1.10.2.js"></script>
+        <script type="text/javascript" src="js/sudoku.js"></script>
+    </head>
+    <body>
+        <div id="sudoku">
+            <div id="game">
+                <div id="grid">
+                </div>
+                <div id="menu">
+                    <button id="load">Load</button>
+                    <button id="play">Play</button>
+                </div>
+            </div>
+            <p>Seleziona un file: <input id="file" type="file" multiple ></p>
+
+            <p>output: <br /><output id="result"></output></p>
+
+            <a href="javascript:startRead();">Leggi il file</a> | 
+
+            <script>
+                function startRead() {
+                    // obtain input element through DOM 
+                    var file = document.getElementById('file').files[0];
+
+                    if (file) {
+                        getAsText(file);
+                    }
+                }
+
+                function getAsText(readFile) {
+
+                    var reader = new FileReader();
+
+                    // Read file into memory as UTF-16      
+                    reader.readAsText(readFile, "UTF-8");
+
+                    // Handle progress, success, and errors
+                    reader.onprogress = updateProgress;
+                    reader.onload = loaded;
+                    reader.onerror = errorHandler;
+                }
+
+                function updateProgress(evt) {
+                    if (evt.lengthComputable) {
+                        // evt.loaded and evt.total are ProgressEvent properties
+                        var loaded = (evt.loaded / evt.total);
+                        if (loaded < 1) {
+                            // Increase the prog bar length
+                            // style.width = (loaded * 200) + "px";
+                            document.getElementById('result').textContent = "caricato il " + loaded + "%";
+                        }
+                    }
+                }
+
+                function loaded(evt) {
+                    // Obtain the read file data    
+                    var fileString = evt.target.result;
+                    document.getElementById('result').textContent = fileString;
+                }
+
+                function errorHandler(evt) {
+                    if (evt.target.error.name == "NOT_READABLE_ERR") {
+                        document.getElementById('result').textContent = "si è verificato un errore nel caricamento";
+                    }
+                }
+            </script>
+        </div>
+        <!--
+    <div id="menu">
+    <h1>Sudoku</h1>
+    <ul>
+        <li><input id="load" type="button" value="Load" /></li>
+        <li><input id="solve" type="button" value="Solve" /></li>
+    </ul>
+    </div>
+    <div id="debug" style="position: absolute; left: 30px; top: 600px"></div>
+        -->
+    </body>
+</html>
